@@ -13,3 +13,6 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+require('./components/ListOrders');
+require('./components/Balance');
+require('./components/ListLoans');

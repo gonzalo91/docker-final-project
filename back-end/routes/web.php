@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/ordenes', function () {
     return view('ordenes');
-})->middleware('auth');
+})->name('orders')->middleware('auth');
 
 Auth::routes();
 
