@@ -15,17 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware('auth');
 
 Route::get('/ordenes', function () {
     return view('ordenes');
-});
-
-Route::get('/api2', function () {
-    var_dump(request()->all());
-
-    return 'works';
-});
+})->middleware('auth');
 
 Auth::routes();
 
