@@ -39,6 +39,10 @@ class FlowProcessTables extends Migration
 
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->decimal('balance')->default(50000.99);
+        });
     }
 
     /**
