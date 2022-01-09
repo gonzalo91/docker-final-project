@@ -19,3 +19,12 @@ class Order extends Model
 
     }
 }
+
+enum OrderStatuses: int{
+
+    case Error = 0;
+    case Pending = 1;
+    case Processing = 2;
+    case Accepted = 3;
+
+}

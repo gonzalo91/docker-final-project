@@ -11,7 +11,7 @@ class UserBalanceController extends Controller
     public function index(){
 
         return [
-            'balance' => request()->user()->balance
+            'balance' => number_format(request()->user()->balance, 2),
         ];
 
     }

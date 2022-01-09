@@ -2,19 +2,51 @@ import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } f
 import ReactDOM from 'react-dom';
 import Loading from './shared/Loading';
 import LoanDS from '../data_sources/loan_ds';
+import iziToast from 'izitoast';
+import OrderDs from '../data_sources/order_ds';
 
 const FundLoan = forwardRef( (props, ref) => {
     const [amount, setAmount] = useState("");
     const [loan, setLoan] = useState({id: '', });
+    const [errors, setErrors] = useState([]);
+    const [saving, setSaving] = useState(false);
 
     const hidePopUp = ()=>{
         $('#exampleModal').modal('hide')
     }
 
-    const submitOrder = (e)=>{
+    const submitOrder = async (e)=>{
         e.preventDefault();
 
-        console.log(amount);
+        setSaving(true);
+        try{
+
+            await OrderDs.storeOrder({ loanId : loan.id, amountToFund: amount});
+            
+            hidePopUp();
+
+            setTimeout(() => {
+                iziToast.success({
+                    title: 'Exito!',
+                    position: 'topRight',
+                    message: 'Orden pujada exitosamente'
+                }); 
+            }, 1);
+        }catch(e){            
+            if(e.response && e.response.status == 422){
+                setErrors([]);
+
+                const errors = Object.entries( e.response.data.errors );                
+
+                setErrors(errors.map(e => e[1][0]));
+
+                return;
+            }            
+            
+            setErrors(['Ha ocurrido un error en el servidor, intentelo de nuevo mas tarde']);
+        }   
+
+        setSaving(false);
     }
 
     useImperativeHandle(
@@ -38,18 +70,25 @@ const FundLoan = forwardRef( (props, ref) => {
                 </div>
                     <form onSubmit={ submitOrder }>
                         <div className="modal-body">
-                                <div className="form-group row">
-                                    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Monto</label>
-                                    <div className="col-sm-10">
-                                        <input type="number" className="form-control" value={amount}   
-                                            onChange={(e) => setAmount(e.target.value)}
-                                        placeholder="Monto a prestar" required />
-                                    </div>
+                            <div className="form-group row">
+                                <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Monto</label>
+                                <div className="col-sm-10">
+                                    <input type="number" className="form-control" value={amount}   
+                                        onChange={(e) => setAmount(e.target.value)}
+                                    placeholder="Monto a prestar" required />
                                 </div>
+                            </div>
+                            { errors.length > 0 && 
+                                <ul className='text-danger mt-2 mb-0'>
+                                    {errors.map(e => (
+                                        <li>{e}</li>
+                                    ))}
+                                </ul>
+                            }
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={hidePopUp}>Cerrar</button>
-                            <button type="submit" className="btn btn-primary">Crear orden</button>
+                            <button type="submit" disabled={saving} className="btn btn-primary">Crear orden</button>
                         </div>
                     </form>
                 </div>

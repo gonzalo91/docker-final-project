@@ -35,7 +35,7 @@ class FlowProcessTables extends Migration
             $table->decimal('real_fund')->default(0);
 
             $table->smallInteger('status');            
-            $table->string('error_msg');
+            $table->string('error_msg')->nullable();
 
             $table->timestamps();
         });
