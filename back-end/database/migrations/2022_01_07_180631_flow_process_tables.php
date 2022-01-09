@@ -20,7 +20,7 @@ class FlowProcessTables extends Migration
 
             $table->decimal('total_amount');        
             $table->dateTime('completed_at')->nullable();        
-            $table->decimal('current_fund');
+            $table->decimal('current_fund')->default(0);
             $table->smallInteger('status');
 
             $table->timestamps();
@@ -32,7 +32,7 @@ class FlowProcessTables extends Migration
             $table->foreignId('loan_id')->constrained();
 
             $table->decimal('user_fund');
-            $table->decimal('real_fund');
+            $table->decimal('real_fund')->default(0);
 
             $table->smallInteger('status');            
             $table->string('error_msg');

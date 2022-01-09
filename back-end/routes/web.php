@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\UserBalanceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +22,11 @@ Route::get('/', function () {
 Route::get('/ordenes', function () {
     return view('ordenes');
 })->name('orders')->middleware('auth');
+
+
+Route::get('loans', [LoanController::class,'index']);
+
+Route::get('balance', [UserBalanceController::class, 'index']);
 
 Auth::routes();
 

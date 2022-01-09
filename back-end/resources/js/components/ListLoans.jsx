@@ -1,6 +1,7 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Loading from './shared/Loading';
+import LoanDS from '../data_sources/loan_ds';
 
 const FundLoan = forwardRef( (props, ref) => {
     const [amount, setAmount] = useState("");
@@ -69,37 +70,17 @@ function ListLoans() {
     const clickLoan = (loan) => {        
         popUpRef.current.fund(loan)        
     }
+
+    useEffect(() => {
+        LoanDS.getLoansToFund()
+        .then(resp =>{
+            setLoans(resp);
+            setLoading(false);
+        })
+    }, []);
     
-
-    setTimeout(() => {
-        setLoading(false)
-
-        setTimeout(() => {
-            setLoans([
-                {
-                    'id': 1,
-                    'rate' : '18.6 %',
-                    'amount': '120,000.00',
-                    'amount_to_fund': '100,000.00',
-                    'user_has_fund': true,
-                },
-                {
-                    'id': 3,
-                    'rate' : '18.6 %',
-                    'amount': '20,000.00',
-                    'amount_to_fund': '4,000.00',
-                    'user_has_fund': false,
-                },
-                {
-                    'id': 2,
-                    'rate' : '15.6 %',
-                    'amount': '320,000.00',
-                    'amount_to_fund': '280,000.00',
-                    'user_has_fund': false,
-                },
-            ])    
-        }, 2000);
-    }, 2000);
+    
+    
 
     if( loading){
         return <Loading label={"prestamos"} />
@@ -122,10 +103,10 @@ function ListLoans() {
             <tbody>
                 { loans.map(loan=>{
                         return (
-                            <tr onClick={() => clickLoan(loan)} key={loan.id} className={loan.user_has_fund ? 'table-success' : ''} style={{cursor: 'pointer'}} >
+                            <tr onClick={() => clickLoan(loan)} key={loan.id} className={loan.orders_count > 0 ? 'table-success' : ''} style={{cursor: 'pointer'}} >
                                 <th scope="row">{ loan.id }</th>
-                                <td>{ loan.rate }</td>
-                                <td>{ loan.amount }</td>
+                                <td>{ loan.interest_rate }</td>
+                                <td>{ loan.total_amount }</td>
                                 <td>{ loan.amount_to_fund }</td>
                             </tr>
                         )
