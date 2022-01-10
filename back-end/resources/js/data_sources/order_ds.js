@@ -14,6 +14,16 @@ const OrderDs = {
             resolve(response.data.data);
         });
 
+    },
+
+    async getOrders() {
+
+        const response = await axios.get('orders', );
+
+        return new Promise(function(resolve, reject) {
+            resolve(response.data.data);
+        });
+
     }
 
 }

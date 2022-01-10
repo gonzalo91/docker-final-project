@@ -28,6 +28,7 @@ Route::get('/ordenes', function () {
 Route::get('loans', [LoanController::class,'index']);
 
 Route::post('orders', [OrderController::class, 'store']);
+Route::get('orders', [OrderController::class, 'getAllByUser']);
 
 Route::get('balance', [UserBalanceController::class, 'index']);
 

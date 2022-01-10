@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
+import OrderDs from '../data_sources/order_ds';
 import Loading from './shared/Loading';
 
 
@@ -8,8 +9,35 @@ function ListOrders() {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    useEffect(async () => {
+        const orders = await OrderDs.getOrders();        
+        setOrders(orders);
+        setLoading(false);        
+    }, []);
+
     if( loading){
         return <Loading label={"tus ordenes"} />
+    }
+
+    const colorStatus = (status) => {
+        let color = '';
+
+        switch(status){
+            case 0:
+                color = 'text-danger';                
+                break;
+            case 1:
+                color = 'text-primary';
+                break;
+            case 2:
+                color = 'text-warning';
+                break;
+            case 3: 
+                color = 'text-success';                
+                break;
+        }
+
+        return color;
     }
 
     return (
@@ -28,11 +56,11 @@ function ListOrders() {
                     orders.map(order => {
                         return <>
                         
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>300</td>
-                            <td>$ 500.00</td>
-                            <td class="text-success">Al Corriente</td>
+                        <tr key={order.id}>
+                            <th scope="row">{order.id}</th>
+                            <td>{ order.loan_id }</td>
+                            <td>{ order.real_fund}</td>
+                            <td className={colorStatus(order.status)}> { order.status_text }</td>
                         </tr>
                         
                         </>

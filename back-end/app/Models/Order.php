@@ -18,6 +18,19 @@ class Order extends Model
         return $this->belongsTo('loans');
 
     }
+
+    public function getStatusTextAttribute(){
+        $statusInt = (int) $this->status;
+        
+
+        return match($statusInt){
+            OrderStatuses::Pending->value => 'Pendiente',
+            OrderStatuses::Processing->value => 'Procesando',
+            OrderStatuses::Accepted->value => 'Aceptada',
+            OrderStatuses::Error->value => 'Error 2',            
+            default => 'Error 1'
+        };
+    }
 }
 
 enum OrderStatuses: int{

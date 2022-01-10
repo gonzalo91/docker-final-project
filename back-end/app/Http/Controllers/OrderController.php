@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStoreRequest;
+use App\Http\Resources\OrderResource;
 use App\Models\Loan;
 use App\Models\{Order, OrderStatuses};
 
@@ -10,6 +11,13 @@ use App\Models\{Order, OrderStatuses};
 class OrderController extends Controller
 {
     
+    public function getAllByUser(){
+
+        $user = request()->user();
+
+        return OrderResource::collection( $user->orders );
+
+    }
 
     public function store(OrderStoreRequest $request){
         $amountToFund = $request->amount_to_fund;
