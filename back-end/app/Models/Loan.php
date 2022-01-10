@@ -14,6 +14,10 @@ class Loan extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function orders_accepted(){
+        return $this->orders()->where('status', OrderStatuses::Accepted);
+    }
+
     public function getAmountToFundAttribute(){
         $ordersSumRealFund = $this->getOrdersSum();        
 
@@ -21,7 +25,7 @@ class Loan extends Model
     }
 
     public function getOrdersSum(){
-        return is_null($this->orders_sum_real_fund) ? 0 : (float) $this->orders_sum_real_fund;        
+        return is_null($this->orders_accepted_sum_real_fund) ? 0 : (float) $this->orders_accepted_sum_real_fund;        
     }
 
 }
