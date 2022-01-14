@@ -6,3 +6,8 @@ class Config:
     DB_NAME = os.environ.get('DB_DATABASE', 'loans')
     DB_USER = os.environ.get('DB_USERNAME', 'user')
     DB_PASS = os.environ.get('DB_PASSWORD', 'pass_user')
+
+
+    REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+    REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
+    REDIS_DB = os.environ.get('REDIS_DB', '0')    
