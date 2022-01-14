@@ -27,7 +27,7 @@ class OrderController extends Controller
         $order->user_id = $request->user()->id;
         $order->loan_id = $loan->id;
         $order->user_fund = $amountToFund;
-        $order->real_fund = $amountToFund;
+        $order->real_fund = 0;
         $order->status    = OrderStatuses::Pending;
         $order->save();        
 
