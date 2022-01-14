@@ -30,6 +30,7 @@ services:
       - DB_DATABASE=loans
       - DB_USERNAME=user
       - DB_PASSWORD=pass_user
+      - REDIS_HOST=redis
 
   proxy: 
     image: nginx:1.21
