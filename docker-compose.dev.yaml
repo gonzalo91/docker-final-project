@@ -1,6 +1,11 @@
 version: '3.2'
 
 services:
+
+  worker:
+    depends_on:
+      - db
+
   db:
     image: mysql:8.0.26
     command: --default-authentication-plugin=mysql_native_password
@@ -21,6 +26,7 @@ services:
       - ./mysql/mysql-files:/var/lib/mysql-files      
     networks:
       - backend-network
+      - worker-network
 
 volumes:
   dbdata:

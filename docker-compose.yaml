@@ -13,6 +13,24 @@ services:
       - /var/www/back-end/vendor      
       - ./back-end/:/var/www/back-end # Dev-Only
   
+ 
+  worker:
+    image: worker
+    build: ./python-worker
+    container_name: worker
+    restart: unless-stopped
+    tty: true    
+    networks:
+      - worker-network
+    volumes:
+      - ./python-worker/:/app-worker/   
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=loans
+      - DB_USERNAME=user
+      - DB_PASSWORD=pass_user
+
   proxy: 
     image: nginx:1.21
     container_name: proxy
@@ -31,4 +49,6 @@ services:
 
 networks:
   backend-network:
+    driver: bridge
+  worker-network:
     driver: bridge
