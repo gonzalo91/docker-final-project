@@ -5295,8 +5295,7 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; //window.axios.defaults.
-
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -5517,37 +5516,34 @@ var FundLoan = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(fu
                   message: 'Orden pujada exitosamente'
                 });
               }, 1);
-              _context.next = 17;
+              _context.next = 12;
               break;
 
             case 9:
               _context.prev = 9;
               _context.t0 = _context["catch"](2);
 
-              if (!(_context.t0.response && _context.t0.response.status == 422)) {
-                _context.next = 16;
-                break;
+              if (_context.t0.response && _context.t0.response.status == 422) {
+                setErrors([]);
+                _errors = Object.entries(_context.t0.response.data.errors);
+                setErrors(_errors.map(function (e) {
+                  return e[1][0];
+                }));
+              } else {
+                setErrors(['Ha ocurrido un error en el servidor, intentelo de nuevo mas tarde']);
               }
 
-              setErrors([]);
-              _errors = Object.entries(_context.t0.response.data.errors);
-              setErrors(_errors.map(function (e) {
-                return e[1][0];
-              }));
-              return _context.abrupt("return");
-
-            case 16:
-              setErrors(['Ha ocurrido un error en el servidor, intentelo de nuevo mas tarde']);
-
-            case 17:
+            case 12:
+              _context.prev = 12;
               setSaving(false);
+              return _context.finish(12);
 
-            case 18:
+            case 15:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 9]]);
+      }, _callee, null, [[2, 9, 12, 15]]);
     }));
 
     return function submitOrder(_x) {
@@ -5864,7 +5860,7 @@ function ListOrders() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
                 children: order.loan_id
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: order.real_fund
+                children: order.amount_to_show
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
                 className: colorStatus(order.status),
                 children: [" ", order.status_text]

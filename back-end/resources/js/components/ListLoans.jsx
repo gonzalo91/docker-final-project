@@ -39,14 +39,16 @@ const FundLoan = forwardRef( (props, ref) => {
                 const errors = Object.entries( e.response.data.errors );                
 
                 setErrors(errors.map(e => e[1][0]));
-
-                return;
-            }            
+                
+            }else{                
+                setErrors(['Ha ocurrido un error en el servidor, intentelo de nuevo mas tarde']);
+            }                             
             
-            setErrors(['Ha ocurrido un error en el servidor, intentelo de nuevo mas tarde']);
+        }finally{
+            setSaving(false);
         }   
 
-        setSaving(false);
+        
     }
 
     useImperativeHandle(

@@ -27,8 +27,8 @@ class Order extends Model
             OrderStatuses::Pending->value => 'Pendiente',
             OrderStatuses::Processing->value => 'Procesando',
             OrderStatuses::Accepted->value => 'Aceptada',
-            OrderStatuses::Error->value => 'Error 2',            
-            default => 'Error 1'
+            OrderStatuses::Error->value => 'Error',            
+            default => 'Error'
         };
     }
 }

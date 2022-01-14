@@ -59,7 +59,7 @@ function ListOrders() {
                         <tr key={order.id}>
                             <th scope="row">{order.id}</th>
                             <td>{ order.loan_id }</td>
-                            <td>{ order.real_fund}</td>
+                            <td>{ order.amount_to_show }</td>
                             <td className={colorStatus(order.status)}> { order.status_text }</td>
                         </tr>
                         
