@@ -4,24 +4,21 @@ class DataSource(ABC):
     
 
     @abstractmethod
-    def select(self,  query: str, params : tuple = (), cursorP = None):
+    def select(self,  query: str, params : tuple = ()):
         pass
 
     @abstractmethod
-    def update(self,  query: str, params : tuple = (), cursorP = None):
+    def update(self,  query: str, params : tuple = ()):
         pass
 
     @abstractmethod
-    def insert(self,  query: str, params : tuple = (), cursorP = None):
+    def insert(self,  query: str, params : tuple = ()):
         pass
 
     @abstractmethod
-    def delete(self,  query: str, params : tuple = (), cursorP = None):
+    def delete(self,  query: str, params : tuple = ()):
         pass
-
-    @abstractmethod
-    def beginTransaction(self, cursor):
-        pass
+    
 
     @abstractmethod
     def commit(self, cursor):
@@ -30,10 +27,7 @@ class DataSource(ABC):
     @abstractmethod
     def rollback(self, cursor):
         pass
-
-    @abstractmethod
-    def getCursor(self):
-        pass
+  
 
 
 

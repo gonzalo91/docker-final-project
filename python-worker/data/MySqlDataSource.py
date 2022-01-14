@@ -5,21 +5,23 @@ from data.DataSource import DataSource
 
 class MySqlDataSource(DataSource):
     
-    __mysqlConn = mysql.connector.connect(
-        host=Config.DB_HOST,
-        user=Config.DB_USER,
-        password=Config.DB_PASS,
-        database=Config.DB_NAME,
-    )   
+    __mysqlConn = None
 
     def __init__(self) -> None:
-        self.__mysqlConn.autocommit(False)
+        self.__mysqlConn = mysql.connector.connect(
+            host=Config.DB_HOST,
+            user=Config.DB_USER,
+            password=Config.DB_PASS,
+            database=Config.DB_NAME,
+        )   
+        
+        self.__mysqlConn.autocommit = False
         
     def select(self, query: str, params : tuple = ()):        
         
         cursor = self.__mysqlConn.cursor(dictionary=True)
         
-        cursor.execute(query, params)
+        cursor.execute(query, (params))
 
         elements = cursor.fetchall()
         

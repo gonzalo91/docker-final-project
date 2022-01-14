@@ -17,7 +17,11 @@ class OrderFlowRepo(ABC):
         pass
 
     @abstractmethod
-    def updateLoan(self, id: int, status: int, current_fund: float):
+    def updateLoan(self, id: int, current_fund: float):
+        pass
+
+    @abstractmethod
+    def completeLoan(self, id: int, current_fund: float):
         pass
 
     ###########
@@ -48,6 +52,7 @@ class OrderFlowRepo(ABC):
     @abstractmethod
     def updateOrder(self, id: int, status: int, realFund: float):
         pass
+    
 
     @abstractmethod
     def updateOrderError(self, id: int, errorMsg : str):
