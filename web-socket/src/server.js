@@ -42,7 +42,7 @@ class Server {
 
         this.app.use(function(req, res, next) {
             console.log(req);
-            var err = new Error('Not Found xd');
+            var err = new Error('Not Found');
             err.status = 404;
             next(err);
         });
@@ -57,7 +57,6 @@ class Server {
         });
 
         this.io.on('connection', (socket) => {
-            console.log('a user connected');
 
             socket.join('notification-1')
 
@@ -71,7 +70,6 @@ class Server {
     }
 
     emitOrderProcessed({ orderId, status, userId }) {
-        console.log(orderId, status, userId);
 
         this.io.to('notification-' + userId).emit('order-processed', {
             'order_id': orderId,
