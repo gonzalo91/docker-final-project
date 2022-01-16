@@ -1,9 +1,10 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import Loading from './shared/Loading';
-import LoanDS from '../data_sources/loan_ds';
 import iziToast from 'izitoast';
+import ReactDOM from 'react-dom';
+import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
+
+import Loading from './shared/Loading';
 import OrderDs from '../data_sources/order_ds';
+import useLoansList from '../hooks/loans_hook';
 
 const FundLoan = forwardRef( (props, ref) => {
     const [amount, setAmount] = useState("");
@@ -102,32 +103,13 @@ const FundLoan = forwardRef( (props, ref) => {
 
   
 function ListLoans() {
-    const [loading, setLoading] = useState(true);
-    const [loans, setLoans] = useState([]);
-
-    
+    const [loading, loans, clickLoan] = useLoansList()
+        
     let popUpRef = useRef();
-
-    const clickLoan = (loan) => {        
-        popUpRef.current.fund(loan)        
-    }
-
-    useEffect(() => {
-        LoanDS.getLoansToFund()
-        .then(resp =>{
-            setLoans(resp);
-            setLoading(false);
-        })
-    }, []);
-    
-    
-    
-
+                
     if( loading){
         return <Loading label={"prestamos"} />
-    }
-
-    
+    }    
 
     return (
       <>     
@@ -144,7 +126,7 @@ function ListLoans() {
             <tbody>
                 { loans.map(loan=>{
                         return (
-                            <tr onClick={() => clickLoan(loan)} key={loan.id} className={loan.orders_count > 0 ? 'table-success' : ''} style={{cursor: 'pointer'}} >
+                            <tr onClick={() => clickLoan(loan, popUpRef)} key={loan.id} className={loan.orders_count > 0 ? 'table-success' : ''} style={{cursor: 'pointer'}} >
                                 <th scope="row">{ loan.id }</th>
                                 <td>{ loan.interest_rate }</td>
                                 <td>{ loan.total_amount }</td>

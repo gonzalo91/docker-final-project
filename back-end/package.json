@@ -24,6 +24,8 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "izitoast": "^1.4.0"
+        "izitoast": "^1.4.0",
+        "pubsub-js": "^1.9.4",
+        "socket.io-client": "^4.4.1"
     }
 }

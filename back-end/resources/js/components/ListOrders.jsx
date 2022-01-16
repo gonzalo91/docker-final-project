@@ -1,19 +1,15 @@
-import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import OrderDs from '../data_sources/order_ds';
+import React, {useState, useEffect} from 'react';
+
+
 import Loading from './shared/Loading';
+import useOrderList from '../hooks/order_hook';
+
 
 
   
 function ListOrders() {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(async () => {
-        const orders = await OrderDs.getOrders();        
-        setOrders(orders);
-        setLoading(false);        
-    }, []);
+    const [orders, loading] = useOrderList()
 
     if( loading){
         return <Loading label={"tus ordenes"} />

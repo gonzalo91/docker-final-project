@@ -71,12 +71,14 @@ class ProcessOrderServices():
                 self.orderFlowRepo.substractBalance(userId, realAmountToFund)
 
                 newCurrentFund = loan['current_fund'] + realAmountToFund
+                
 
                 if(status == 1):
                     self.orderFlowRepo.updateLoan(loanId, newCurrentFund)
                 else:
                     events.append({'type' : 1, 'loan_id': loanId})
                     self.orderFlowRepo.completeLoan(loanId, newCurrentFund)
+
 
                 self.orderFlowRepo.updateOrder(order['id'], 3, realAmountToFund)
                 events.append({'type' : 2, 'order_id': order['id'], 'user_id': userId, 'status': 'ok'})
