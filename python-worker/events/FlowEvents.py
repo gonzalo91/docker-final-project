@@ -7,7 +7,7 @@ class FlowEvents(ABC):
         pass
 
     @abstractmethod
-    def orderProcessed(self, id: int, status: str):
+    def orderProcessed(self, id: int, userId: int, status: str):
         pass
 
 

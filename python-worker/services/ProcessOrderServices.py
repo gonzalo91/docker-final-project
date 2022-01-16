@@ -79,7 +79,7 @@ class ProcessOrderServices():
                     self.orderFlowRepo.completeLoan(loanId, newCurrentFund)
 
                 self.orderFlowRepo.updateOrder(order['id'], 3, realAmountToFund)
-                events.append({'type' : 2, 'order_id': order['id'], 'status': 'ok'})
+                events.append({'type' : 2, 'order_id': order['id'], 'user_id': userId, 'status': 'ok'})
 
                 self.orderFlowRepo.commit()
             except exceptions.Error as e:                
@@ -90,7 +90,7 @@ class ProcessOrderServices():
                     pass
                 self.orderFlowRepo.updateOrderError(order['id'], e.getMessage() )
                 self.orderFlowRepo.commit()
-                events.append({'type' : 2, 'order_id': order['id'], 'status': 'refused'})
+                events.append({'type' : 2, 'order_id': order['id'], 'user_id': userId, 'status': 'refused'})
                 
             except Exception as e:
                 events = []
@@ -101,7 +101,7 @@ class ProcessOrderServices():
                                 
                 self.orderFlowRepo.updateOrderError(order['id'], 'Desconocido' )
                 self.orderFlowRepo.commit()
-                events.append({'type' : 2, 'order_id': order['id'], 'status': 'refused'})
+                events.append({'type' : 2, 'order_id': order['id'], 'user_id': userId, 'status': 'refused'})
 
             self.dispatchEvents(events)
 
@@ -113,7 +113,7 @@ class ProcessOrderServices():
                 self.flowEvent.loanFunded(event['loan_id'])
 
             if(event['type'] == 2):
-                self.flowEvent.orderProcessed(event['order_id'], str(event['status']))
+                self.flowEvent.orderProcessed(event['order_id'], event['user_id'], str(event['status']))
 
                 
 
