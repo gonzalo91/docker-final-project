@@ -48,6 +48,21 @@ services:
     networks:
       - backend-network
 
+  web-socket:
+    image: web-socket
+    container_name: web-socket
+    build: ./web-socket
+    restart: unless-stopped
+    volumes:
+      - ./web-socket/:/app
+    tty: true
+    environment:      
+      - REDIS_HOST=redis
+    networks:
+      - worker-network
+      - backend-network
+    
+
 networks:
   backend-network:
     driver: bridge
