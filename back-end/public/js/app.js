@@ -6389,9 +6389,11 @@ function useLoansList() {
   }
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var token = PubSub.subscribe(_config__WEBPACK_IMPORTED_MODULE_1__["default"].pubsub_loan_funded, handleLoansChange);
+    var token = PubSub.subscribe(_config__WEBPACK_IMPORTED_MODULE_1__["default"].pubsub_order_processed, handleLoansChange);
+    var token2 = PubSub.subscribe(_config__WEBPACK_IMPORTED_MODULE_1__["default"].pubsub_loan_funded, handleLoansChange);
     return function () {
       PubSub.unsubscribe(token);
+      PubSub.unsubscribe(token2);
     };
   });
   return [loading, loans, clickLoan];

@@ -24,10 +24,12 @@ function useLoansList() {
 
     useEffect(() => {
 
-        const token = PubSub.subscribe(config.pubsub_loan_funded, handleLoansChange);
+        const token = PubSub.subscribe(config.pubsub_order_processed, handleLoansChange);
+        const token2 = PubSub.subscribe(config.pubsub_loan_funded, handleLoansChange);
 
         return () => {
             PubSub.unsubscribe(token);
+            PubSub.unsubscribe(token2);
         };
     });
 
