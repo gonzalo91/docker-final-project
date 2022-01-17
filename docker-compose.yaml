@@ -10,8 +10,10 @@ services:
     networks:
       - backend-network
     volumes:
-      - /var/www/back-end/vendor      
+      - composer:/var/www/back-end/vendor      
       - ./back-end/:/var/www/back-end # Dev-Only
+    environment:
+      - JWT_SECRET=zalo
   
  
   worker:
@@ -58,10 +60,14 @@ services:
     tty: true
     environment:      
       - REDIS_HOST=redis
+      - JWT_SECRET=zalo
     networks:
       - worker-network
       - backend-network
     
+
+volumes:
+  composer:
 
 networks:
   backend-network:
