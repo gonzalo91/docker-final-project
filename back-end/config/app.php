@@ -121,6 +121,8 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'jwt_secret' => env('JWT_SECRET'),
+
     'cipher' => 'AES-256-CBC',
 
     /*
