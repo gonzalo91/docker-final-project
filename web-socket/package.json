@@ -11,9 +11,11 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "cookie": "^0.4.1",
         "cors": "^2.8.5",
         "esm": "^3.2.25",
         "express": "^4.17.2",
+        "jsonwebtoken": "^8.5.1",
         "redis": "^4.0.2",
         "socket.io": "^4.4.0"
     }

@@ -1,7 +1,12 @@
-import express from 'express';
 import cors from 'cors'
 import http from 'http'
+import cookie from 'cookie'
+import express from 'express';
+
+import jwt from 'jsonwebtoken'
 import { Server as socketIO } from "socket.io";
+import config from './config.js';
+
 
 class Server {
 
@@ -57,8 +62,20 @@ class Server {
         });
 
         this.io.on('connection', (socket) => {
+            try {
 
-            socket.join('notification-1')
+                const cookies = cookie.parse(socket.handshake.headers.cookie);
+
+                const decoded = jwt.verify(cookies.jwt, config.jwt_secret);
+
+                const userId = decoded.data.user_id;
+
+                socket.join('notification-' + userId);
+
+            } catch (e) {
+                console.log('Error decoding jwt');
+            }
+
 
             socket.on('disconnect', () => { console.log('user disconnected'); });
         }, )
