@@ -1,6 +1,6 @@
 
 ## Run it
-To run this project you have to have installed docker and docker-compose 
+To run this project you need to have installed docker and docker-compose 
 Then execute
 ```sh
 docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up
