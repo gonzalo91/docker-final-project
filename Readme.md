@@ -27,13 +27,13 @@ The project tries to simulate the flow of a loan funding process. Let's say you 
 Users or investors can see the available loans, submit and order and see if their orders have been accepted or rejected *(Laravel)*. A worker in the background process all this orders *(python worker)* and notifies through a message broker *(Redis)* to the web-socket service *(NodeJs)* which events has been triggered so it can emit them to the front-end *(React)*.
 
 ## Tecnologies
-Front-end:       **React**
-Back-end:        **PHP (Laravel)**
-BD:              **MySql**
-Message Broker:  **Redis**
-Web-socket:      **NodeJs (SocketIO and Express)**
-Worker:          **Python**
-Proxy:           **Nginx**
+- Front-end:       **React**
+- Back-end:        **PHP (Laravel)**
+- BD:              **MySql**
+- Message Broker:  **Redis**
+- Web-socket:      **NodeJs (SocketIO and Express)**
+- Worker:          **Python**
+- Proxy:           **Nginx**
 
 
 # Folder Structure
