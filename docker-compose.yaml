@@ -2,81 +2,77 @@ version: '3.2'
 
 services:
   back-end:
-    image: backend
+    image: zalollauri/loan-back-end:1.0
     build: ./back-end
     container_name: back-end
     restart: unless-stopped
     tty: true    
     networks:
-      - backend-network
-    volumes:
-      - composer:/var/www/back-end/vendor      
-      - ./back-end/:/var/www/back-end # Dev-Only
+      - backend-network  
+    deploy:
+      replicas: 1 
+      mode: replicated
+      labels: [APP=BACKEND] 
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        window: 120s
     environment:
-      - JWT_SECRET=zalo
-      - DB_CONNECTION=mysql
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=loans
-      - DB_USERNAME=user
-      - DB_PASSWORD=pass_user
+      - JWT_SECRET=${JWT_SECRET:-secret}      
+      - DB_HOST=${DB_HOST:-db}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_DATABASE=${DB_DATABASE:-loans}
+      - DB_USERNAME=${DB_USERNAME:-user}
+      - DB_PASSWORD=${DB_PASSWORD:-pass_user}
   
  
   worker:
-    image: worker
+    image: zalollauri/loan-worker:1.0.0
     build: ./python-worker
     container_name: worker
     restart: unless-stopped
     tty: true    
     networks:
       - worker-network
-    volumes:
-      - ./python-worker/:/app-worker/   
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=loans
-      - DB_USERNAME=user
-      - DB_PASSWORD=pass_user
-      - REDIS_HOST=redis
+    deploy:    
+    environment:      
+      - DB_HOST=${DB_HOST:-db}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_DATABASE=${DB_DATABASE:-loans}
+      - DB_USERNAME=${DB_USERNAME:-user}
+      - DB_PASSWORD=${DB_PASSWORD:-pass_user}
+      - REDIS_HOST=${REDIS_HOST:-redis}
 
   proxy: 
-    image: nginx:1.21
+    image: zalollauri/loan.proxy:1.0.0
     container_name: proxy
     restart: unless-stopped
     tty: true
     ports:
       - "80:80"
-      - "443:443"
-    volumes:      
-      - ./back-end/:/var/www/back-end    
-      - ./proxy:/etc/nginx/conf.d/     
+      - "443:443"    
     depends_on:
       - back-end
+    deploy:
     networks:
       - backend-network
 
   web-socket:
-    image: web-socket
+    image: zalollauri/loan.web-sockets:1.0.0
     container_name: web-socket
     build: ./web-socket
-    restart: unless-stopped
-    volumes:
-      - ./web-socket/:/app
+    restart: unless-stopped    
     tty: true
     environment:      
-      - REDIS_HOST=redis
-      - JWT_SECRET=zalo
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - JWT_SECRET=${JWT_SECRET:-secret}
+    deploy:
     networks:
       - worker-network
       - backend-network
-    
-
-volumes:
-  composer:
 
 networks:
   backend-network:
-    driver: bridge
+    driver: overlay
   worker-network:
-    driver: bridge
+    driver: overlay
