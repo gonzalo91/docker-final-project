@@ -24,7 +24,7 @@ class OrderStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount_to_fund' => 'required|numeric|min:200',
+            'amount_to_fund' => 'required|numeric|min:200|max:999999',
             'loan_id' => 'required|numeric',
         ];
     }
