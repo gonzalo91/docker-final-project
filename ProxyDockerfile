@@ -1,0 +1,6 @@
+FROM nginx:1.21
+
+COPY ./back-end/ /var/www/back-end    
+COPY ./proxy/ /etc/nginx/conf.d/    
+
+EXPOSE 80 443
