@@ -36,12 +36,28 @@ Users or investors can see the available loans, submit and order and see if thei
 - Proxy:           **Nginx**
 
 
-# Folder Structure
+## Folder Structure
 We have separeted the different projects in folders which reveal its main purpose.
 Inside *python-worker*, we have the code in python which is responsible to process all the pending orders.
 In *back-end* folder, we store the laravel application, as well as the skeleton configuration for a react front-end.
 And in *web-socket* you may infiere what's been done there.
 
+
+## Build
+docker build -t zalollauri/loan-back-end:1.0 ./back-end
+docker push  zalollauri/loan-back-end:1.0
+
+docker build -t zalollauri/loan.web-sockets:1.0.0 ./web-socket
+docker push  zalollauri/loan.web-sockets:1.0.0
+
+docker build -t zalollauri/loan-worker:1.0.0 ./python-worker
+docker push  zalollauri/loan-worker:1.0.0
+
+
+
+##  Deploy
+
+docker stack deploy -c docker-compose.yml name_stack
 
 ## Events - worker -> websockets
 | Event | Name            | Params                              |

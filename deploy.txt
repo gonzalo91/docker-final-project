@@ -1,0 +1,24 @@
+# After setting up instances and db's
+# 
+
+1. Install docker (server)
+    curl -sSL https://get.docker.com/ | sh
+2. Create folder for storing config files and envs (server)
+    mkdir app
+
+3. Upload files (local)
+    scp docker-compose.yaml .env start-stack.sh root@159.223.120.83:~/app
+
+4. Run bash script for setting up env variables (server)
+    source ./start-stack.sh
+
+5. Init swarm (Server)
+     docker swarm init --advertise-addr [IP_SERVER]
+
+
+6. Run stack (server)
+    docker stack deploy -c docker-compose.yaml loans
+
+
+
+
