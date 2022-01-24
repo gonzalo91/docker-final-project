@@ -1,10 +1,12 @@
 import { createClient } from 'redis';
 import config from './config.js';
 
+const redisTSL = config.env == 'production' ? 'rediss' : 'redis';
+
 class Events {
 
+    static url = `${redisTSL}://${config.redis_user}:${config.redis_pass}@${config.redis_host}:${config.redis_port}/${config.redis_db}`;
 
-    static url = 'redis://' + config.redis_host + ':' + config.redis_port
     server
 
     constructor(server) {

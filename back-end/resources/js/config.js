@@ -1,7 +1,10 @@
+const url = process.env.NODE_ENV == 'production' ? 'http://dp.com' : process.env.MIX_APP_URL;
+
+
 const config = {
+    env: process.env.NODE_ENV,
 
-    app_url: process.env.MIX_APP_URL || 'localhost',
-
+    app_url: url,
 
 
     event_order_processed: 'order-processed',
