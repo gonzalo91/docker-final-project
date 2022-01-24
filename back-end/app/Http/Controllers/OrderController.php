@@ -15,7 +15,7 @@ class OrderController extends Controller
 
         $user = request()->user();
 
-        return OrderResource::collection( $user->orders );
+        return OrderResource::collection( $user->orders()->orderBy('id', 'desc')->get() );
 
     }
 
