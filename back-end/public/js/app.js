@@ -6081,8 +6081,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+var url =  false ? 0 : "http://localhost";
 var config = {
-  app_url: "http://localhost" || 0,
+  env: "development",
+  app_url: url,
   event_order_processed: 'order-processed',
   event_loan_funded: 'loan-funded',
   pubsub_order_processed: 'ORDER_PROCESSED',

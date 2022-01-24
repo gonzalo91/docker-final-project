@@ -57,7 +57,6 @@ COPY --chown=www:www . /var/www/back-end
 
 COPY --from=vendor /packages/vendor /var/www/back-end/vendor
 
-RUN php artisan optimize:clear
 
 EXPOSE 9000
 

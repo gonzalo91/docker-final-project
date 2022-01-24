@@ -23,7 +23,7 @@ class OrderResource extends JsonResource
 
         $array['status_text'] = $this->status_text . $tailStatus;
 
-        $amountToShow = $this->status == OrderStatuses::Error->value ? $this->user_fund : $this->real_fund;
+        $amountToShow = $this->status == OrderStatuses::Accepted->value ? $this->real_fund : $this->user_fund ;
         $array['amount_to_show'] = number_format($amountToShow, 2);
 
         return $array;
