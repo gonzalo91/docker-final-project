@@ -13,6 +13,8 @@ services:
       - ./proxy:/etc/nginx/conf.d/     
 
   worker:
+    volumes:
+      - ./python-worker:/home/app/app-worker
     depends_on:
       - db
       - redis

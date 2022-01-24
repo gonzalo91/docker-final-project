@@ -42,6 +42,10 @@ services:
       - DB_USERNAME=${DB_USERNAME:-user}
       - DB_PASSWORD=${DB_PASSWORD:-pass_user}
       - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PASS=${REDIS_PASS:-}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_DB=${REDIS_DB:-0}
+      - APP_ENV=${APP_ENV:-production}
 
   proxy: 
     image: zalollauri/loan.proxy:1.0.0

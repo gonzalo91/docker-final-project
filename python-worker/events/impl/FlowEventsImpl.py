@@ -9,14 +9,22 @@ class FlowEventsImpl(FlowEvents):
     
 
     def __init__(self) -> None:
-        self.redis = redis.Redis(host=Config.REDIS_HOST, port=Config.REDIS_PORT, db=Config.REDIS_DB)
+        requireSsl = Config.ENV == 'production'        
+        
+        self.redis = redis.StrictRedis(
+            host=Config.REDIS_HOST, 
+            port=Config.REDIS_PORT, 
+            password=Config.REDIS_PASS, 
+            db=Config.REDIS_DB,
+            ssl=requireSsl
+        )
     
     
     def loanFunded(self, id: int):
         data = {
             'loan_id' : id
         }
-
+        
         self.redis.publish('loan-funded', json.dumps(data))
 
     
