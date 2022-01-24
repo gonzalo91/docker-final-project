@@ -21,8 +21,7 @@ services:
 
   web-socket:
     depends_on:
-      - redis
-      - proxy
+      - redis      
     volumes:
       - ./web-socket/:/app
 

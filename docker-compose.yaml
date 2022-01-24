@@ -18,6 +18,7 @@ services:
         delay: 10s
         window: 120s
     environment:
+      - APP_KEY=${BACK_END_APP_KEY:-}
       - JWT_SECRET=${JWT_SECRET:-secret}      
       - DB_HOST=${DB_HOST:-db}
       - DB_PORT=${DB_PORT:-3306}
@@ -57,6 +58,8 @@ services:
       - "443:443"    
     depends_on:
       - back-end
+      - worker
+      - web-socket
     deploy:
     networks:
       - backend-network
@@ -69,7 +72,11 @@ services:
     tty: true
     environment:      
       - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PASS=${REDIS_PASS:-}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_DB=${REDIS_DB:-0}
       - JWT_SECRET=${JWT_SECRET:-secret}
+      - APP_ENV=${APP_ENV:-production}
     deploy:
     networks:
       - worker-network
