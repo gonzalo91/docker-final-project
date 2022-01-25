@@ -53,11 +53,14 @@ docker push  zalollauri/loan.web-sockets:1.0.0
 docker build -t zalollauri/loan-worker:1.0.0 ./python-worker
 docker push  zalollauri/loan-worker:1.0.0
 
+docker build -t zalollauri/loan.proxy:1.0.0 -f ProxyDockerfile .
+docker push  zalollauri/loan.proxy:1.0.0
+
 
 
 ##  Deploy
 
-docker stack deploy -c docker-compose.yml name_stack
+Check deploy.txt
 
 ## Events - worker -> websockets
 | Event | Name            | Params                              |

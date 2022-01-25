@@ -17,7 +17,7 @@
 
 
 6. Run stack (server)
-    docker stack deploy -c docker-compose.yaml loans
+    bash start-stack.sh     
 
 
 
