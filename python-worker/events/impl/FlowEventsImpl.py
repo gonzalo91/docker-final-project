@@ -16,7 +16,8 @@ class FlowEventsImpl(FlowEvents):
             port=Config.REDIS_PORT, 
             password=Config.REDIS_PASS, 
             db=Config.REDIS_DB,
-            ssl=requireSsl
+            ssl=requireSsl,
+            ssl_cert_reqs=None,
         )
     
     

@@ -7,12 +7,15 @@ class MySqlDataSource(DataSource):
     
     __mysqlConn = None
 
-    def __init__(self) -> None:
+    def __init__(self) -> None:        
+
         self.__mysqlConn = mysql.connector.connect(
             host=Config.DB_HOST,
+            port=Config.DB_PORT,
             user=Config.DB_USER,
             password=Config.DB_PASS,
             database=Config.DB_NAME,
+            tls_versions=['TLSv1.2'],            
         )   
         
         self.__mysqlConn.autocommit = False
