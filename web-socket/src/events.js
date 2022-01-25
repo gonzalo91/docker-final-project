@@ -18,8 +18,10 @@ class Events {
 
 
         const client = createClient({
-            url: Events.url
+            url: Events.url,
+            tls: {},
         });
+
 
         client.on('error', (err) => console.log('Redis Client Error', err));
 
