@@ -11,6 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+const appName = mix.inProduction() ? 'app-prod.js' : 'app.js';
+
+mix.js(`resources/js/app.js`, `public/js/${appName}`)
     .react()
     .sass('resources/sass/app.scss', 'public/css');

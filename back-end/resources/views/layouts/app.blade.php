@@ -11,7 +11,11 @@
 
     <!-- Scripts -->    
     @if (Auth::check())    
-        <script src="{{ asset('js/app.js') }}" defer></script>    
+        @if( config('app.env') == 'production' )
+            <script src="{{ asset('js/app-prod.js') }}" defer></script>    
+        @else
+            <script src="{{ asset('js/app.js') }}" defer></script>    
+        @endif
     @endif
 
     <!-- Fonts -->
