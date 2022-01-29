@@ -1,4 +1,4 @@
-const url = process.env.NODE_ENV == 'production' ? 'http://dp.com' : process.env.MIX_APP_URL;
+const url = process.env.NODE_ENV == 'production' ? 'https://prestamos.tk' : process.env.MIX_APP_URL;
 
 
 const config = {
