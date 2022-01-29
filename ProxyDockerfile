@@ -1,6 +1,7 @@
 FROM nginx:1.21
 
-COPY ./back-end/ /var/www/back-end    
-COPY ./proxy/ /etc/nginx/conf.d/    
+COPY ./back-end/public /var/www/back-end/public
+COPY ./proxy/ /etc/nginx/conf.d/  
+
 
 EXPOSE 80 443
