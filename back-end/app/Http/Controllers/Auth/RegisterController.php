@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Helpers\GenerateJWT;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -69,5 +72,16 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $jwt = GenerateJWT::execute($user);
+
+        $cookie = cookie('jwt', $jwt, 60 * 24); 
+
+        return $request->wantsJson()
+            ? (new JsonResponse([], 201))->withCookie($cookie)
+            : redirect($this->redirectPath())->withCookie($cookie);
     }
 }
