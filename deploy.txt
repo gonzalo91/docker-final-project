@@ -17,7 +17,11 @@
 
 
 6. Run stack (server)
-    bash start-stack.sh     
+    bash start-stack.sh   
+
+
+7. Load SSL Certificates
+scp ~/certificates/prestamos.tk/privkey.pem ~/certificates/prestamos.tk/fullchain.pem root@dp.com:/usr/local/ssl-certificates  
 
 
 

@@ -1,4 +1,6 @@
-version: '3.2'
+# Docs: https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+version: '3.4'
 
 services:
   back-end:
@@ -10,9 +12,13 @@ services:
     networks:
       - backend-network  
     deploy:
-      replicas: 1 
+      replicas: 2 
       mode: replicated
       labels: [APP=BACKEND] 
+      update_config:
+        parallelism: 2
+        delay: 10s
+        order: start-first
       restart_policy:
         condition: on-failure
         delay: 10s
@@ -25,6 +31,11 @@ services:
       - DB_DATABASE=${DB_DATABASE:-loans}
       - DB_USERNAME=${DB_USERNAME:-user}
       - DB_PASSWORD=${DB_PASSWORD:-pass_user}
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PASSWORD=${REDIS_PASS:-}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_DB=${REDIS_DB:-1}
+      - SESSION_DRIVER=${BACK_END_APP_SESSION_DRIVER:-file}
   
  
   worker:
