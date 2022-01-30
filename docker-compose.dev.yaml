@@ -10,8 +10,8 @@ services:
   proxy:
     volumes:      
       - ./back-end/:/var/www/back-end    
-      - ./proxy:/etc/nginx/conf.d/     
-
+      - ./proxy/app.dev.conf:/etc/nginx/conf.d/app.conf
+      - ./proxy/common/base.conf:/etc/nginx/conf.d/common/base.conf
   worker:
     volumes:
       - ./python-worker:/home/app/app-worker
