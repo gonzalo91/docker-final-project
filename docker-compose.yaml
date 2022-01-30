@@ -66,7 +66,9 @@ services:
     tty: true
     ports:
       - "80:80"
-      - "443:443"    
+      - "443:443"   
+    volumes:
+      - /usr/local/ssl-certificates/:/usr/local/ssl-certificates/ 
     depends_on:
       - back-end
       - worker
