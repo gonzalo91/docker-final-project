@@ -47,6 +47,8 @@ services:
     networks:
       - worker-network
     deploy:    
+      mode: replicated
+      replicas: 2
     environment:      
       - DB_HOST=${DB_HOST:-db}
       - DB_PORT=${DB_PORT:-3306}
@@ -74,6 +76,11 @@ services:
       - worker
       - web-socket
     deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.role==manager"
     networks:
       - backend-network
 
@@ -91,6 +98,8 @@ services:
       - JWT_SECRET=${JWT_SECRET:-secret}
       - APP_ENV=${APP_ENV:-production}
     deploy:
+      mode: replicated
+      replicas: 1
     networks:
       - worker-network
       - backend-network
