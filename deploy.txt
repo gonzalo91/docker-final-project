@@ -7,21 +7,22 @@
     mkdir app
 
 3. Upload files (local)
-    scp docker-compose.yaml .env start-stack.sh root@159.223.120.83:~/app
+    scp docker-compose.yaml .env start-stack.sh [USER]@[IP_SERVER]:~/app
 
-4. Run bash script for setting up env variables (server)
-    source ./start-stack.sh
+    - scp -i ~/.ssh/docker-test.pem docker-compose.yaml .env start-stack.sh ubuntu@adp.com:~/app
+
+4. Create docker group and add user using the following instructions:
+https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
 
 5. Init swarm (Server)
      docker swarm init --advertise-addr [IP_SERVER]
-
 
 6. Run stack (server)
     bash start-stack.sh   
 
 
-7. Load SSL Certificates
-scp ~/certificates/prestamos.tk/privkey.pem ~/certificates/prestamos.tk/fullchain.pem root@dp.com:/usr/local/ssl-certificates  
+7. Load SSL Certificates (In case you have your ssl certificates in your local machine)
+scp ~/certificates/prestamos.tk/privkey.pem ~/certificates/prestamos.tk/fullchain.pem [USER]@[IP_SERVER]:/usr/local/ssl-certificates  
 
 
 
