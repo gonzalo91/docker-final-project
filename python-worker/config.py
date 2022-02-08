@@ -13,4 +13,5 @@ class Config:
     REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
     REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
     REDIS_PASS = os.environ.get('REDIS_PASS', '')
-    REDIS_DB = os.environ.get('REDIS_DB', '0')    
+    REDIS_DB = os.environ.get('REDIS_DB', '0') 
+    REDIS_REQUIRE_SSL = os.environ.get('REDIS_REQUIRE_SSL', 'false')   

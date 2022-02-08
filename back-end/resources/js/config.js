@@ -1,5 +1,5 @@
-const url = process.env.NODE_ENV == 'production' ? 'https://prestamos.tk' : process.env.MIX_APP_URL;
-
+const location = window.location.href
+const url = process.env.NODE_ENV == 'production' ? location : process.env.MIX_APP_URL;
 
 const config = {
     env: process.env.NODE_ENV,

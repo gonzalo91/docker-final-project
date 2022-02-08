@@ -9,7 +9,7 @@ class FlowEventsImpl(FlowEvents):
     
 
     def __init__(self) -> None:
-        requireSsl = Config.ENV == 'production'        
+        requireSsl = Config.REDIS_REQUIRE_SSL == 'true'
         
         self.redis = redis.StrictRedis(
             host=Config.REDIS_HOST, 

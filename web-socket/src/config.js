@@ -9,6 +9,9 @@ const config = {
     redis_user: process.env.REDIS_USER || 'default',
     redis_pass: process.env.REDIS_PASS || '',
     redis_db: process.env.REDIS_DB || '0',
+    redis_require_ssl: process.env.REDIS_REQUIRE_SSL == 'true' || false,
+
+
 
     jwt_secret: process.env.JWT_SECRET || '',
 }

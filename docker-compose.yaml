@@ -35,7 +35,9 @@ services:
       - REDIS_PASSWORD=${REDIS_PASS:-}
       - REDIS_PORT=${REDIS_PORT:-6379}
       - REDIS_DB=${REDIS_DB:-1}
+      - REDIS_REQUIRE_SSL=${REDIS_REQUIRE_SSL:-false}
       - SESSION_DRIVER=${BACK_END_APP_SESSION_DRIVER:-file}
+      - APP_ENV=${APP_ENV:-production}
   
  
   worker:
@@ -59,6 +61,7 @@ services:
       - REDIS_PASS=${REDIS_PASS:-}
       - REDIS_PORT=${REDIS_PORT:-6379}
       - REDIS_DB=${REDIS_DB:-0}
+      - REDIS_REQUIRE_SSL=${REDIS_REQUIRE_SSL:-false}
       - APP_ENV=${APP_ENV:-production}
 
   proxy: 
@@ -95,6 +98,7 @@ services:
       - REDIS_PASS=${REDIS_PASS:-}
       - REDIS_PORT=${REDIS_PORT:-6379}
       - REDIS_DB=${REDIS_DB:-0}
+      - REDIS_REQUIRE_SSL=${REDIS_REQUIRE_SSL:-false}
       - JWT_SECRET=${JWT_SECRET:-secret}
       - APP_ENV=${APP_ENV:-production}
     deploy:

@@ -1,7 +1,7 @@
 import { createClient } from 'redis';
 import config from './config.js';
 
-const redisTSL = config.env == 'production' ? 'rediss' : 'redis';
+const redisTSL = config.redis_require_ssl ? 'rediss' : 'redis';
 
 class Events {
 
