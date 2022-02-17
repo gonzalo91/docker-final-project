@@ -6,7 +6,7 @@ https://prestamos.tk/
 To run this project you need to have installed docker and docker-compose 
 Then execute
 ```sh
-docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up
+bash start-compose.sh
 ```
 Connect to the **back-end** service and run migrations
 ```sh
