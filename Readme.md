@@ -54,8 +54,8 @@ docker push  zalollauri/loan.web-sockets:1.0.0
 docker build -t zalollauri/loan-worker:1.0.0 ./python-worker
 docker push  zalollauri/loan-worker:1.0.0
 
-docker build -t zalollauri/loan-back-end:1.0.2 ./back-end
-docker push  zalollauri/loan-back-end:1.0.2
+docker build -t zalollauri/loan-back-end:1.1.0 ./back-end
+docker push  zalollauri/loan-back-end:1.1.0
 
 docker build -t zalollauri/loan.proxy:1.0.0 -f ProxyDockerfile .;
 docker push  zalollauri/loan.proxy:1.0.0

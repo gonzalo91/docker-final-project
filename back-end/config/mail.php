@@ -92,8 +92,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'notificacion@prestamos.tk'),
+        'name' => env('MAIL_FROM_NAME', 'Prestamos'),
     ],
 
     /*
@@ -114,5 +114,7 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    'mail_notification' => env('MAIL_NOTIFICATION', ),
 
 ];

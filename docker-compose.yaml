@@ -4,7 +4,7 @@ version: '3.4'
 
 services:
   back-end:
-    image: zalollauri/loan-back-end:1.0.2
+    image: zalollauri/loan-back-end:1.1.0
     build: ./back-end
     container_name: back-end
     restart: unless-stopped
@@ -38,6 +38,16 @@ services:
       - REDIS_REQUIRE_SSL=${REDIS_REQUIRE_SSL:-false}
       - SESSION_DRIVER=${BACK_END_APP_SESSION_DRIVER:-file}
       - APP_ENV=${APP_ENV:-production}
+      - MAIL_MAILER=${MAIL_MAILER}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT:-2525}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-tls}
+      - MAIL_NOTIFICATION=${MAIL_NOTIFICATION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
   
  
   worker:
