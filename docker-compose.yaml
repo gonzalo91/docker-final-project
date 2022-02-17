@@ -4,7 +4,7 @@ version: '3.4'
 
 services:
   back-end:
-    image: zalollauri/loan-back-end:1.0
+    image: zalollauri/loan-back-end:1.0.2
     build: ./back-end
     container_name: back-end
     restart: unless-stopped
