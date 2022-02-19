@@ -4,7 +4,7 @@ version: '3.4'
 
 services:
   back-end:
-    image: zalollauri/loan-back-end:1.1.0
+    image: zalollauri/loan-back-end:1.2.0
     build: ./back-end
     container_name: back-end
     restart: unless-stopped
@@ -48,6 +48,8 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - AWS_BUCKET=${AWS_BUCKET}
+      - FILESYSTEM_DRIVER=${FILESYSTEM_DRIVER}
   
  
   worker:
@@ -91,6 +93,9 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      update_config:        
+        delay: 10s
+        order: start-first
       placement:
         constraints:
           - "node.role==manager"

@@ -20,6 +20,7 @@ import AppSockets from './app_sockets';
 require('./components/ListOrders');
 require('./components/Balance');
 require('./components/ListLoans');
+require('./components/Profile');
 
 const appSockets = new AppSockets()
 

@@ -2,35 +2,36 @@
 
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserBalanceController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::middleware('auth')
+->group(function(){
 
-Route::get('/ordenes', function () {
-    return view('ordenes');
-})->name('orders')->middleware('auth');
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
+    
+    Route::get('/ordenes', function () {
+        return view('ordenes');
+    })->name('orders');
+    
+    Route::get('/perfil', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/perfil/image-profile', [ProfileController::class, 'image']);
+    Route::post('/perfil/image-profile', [ProfileController::class, 'updateImage']);
+    
+    
+    Route::get('loans', [LoanController::class,'index']);
+    
+    Route::post('orders', [OrderController::class, 'store']);
+    Route::get('orders', [OrderController::class, 'getAllByUser']);
+    
+    Route::get('balance', [UserBalanceController::class, 'index']);
 
+});
 
-Route::get('loans', [LoanController::class,'index']);
-
-Route::post('orders', [OrderController::class, 'store']);
-Route::get('orders', [OrderController::class, 'getAllByUser']);
-
-Route::get('balance', [UserBalanceController::class, 'index']);
 
 Auth::routes();
 
