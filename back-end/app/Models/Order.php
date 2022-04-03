@@ -11,11 +11,11 @@ class Order extends Model
 
 
     public function user(){
-        return $this->belongsTo('users');
+        return $this->belongsTo(User::class);
     }
 
     public function loan(){
-        return $this->belongsTo('loans');
+        return $this->belongsTo(Loan::class);
 
     }
 

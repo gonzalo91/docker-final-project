@@ -21,7 +21,7 @@ class LoanDashboardResource extends JsonResource
         return [
             'id' => $this->id,
             'orders_count' => $this->orders_count,
-            'interest_rate' => $this->interest_rate . ' %',
+            'interest_rate' => number_format($this->interest_rate, 1) . ' %',
             'total_amount' => '$ '. number_format($this->total_amount, 2),
             'orders_sum_real_fund' => '$ '.  number_format($this->getOrdersSum(), 2),                        
             'amount_to_fund' => '$ ' . number_format($this->amount_to_fund, 2),

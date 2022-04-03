@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\OrderStatuses;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 
@@ -25,6 +26,7 @@ class OrderResource extends JsonResource
 
         $amountToShow = $this->status == OrderStatuses::Accepted->value ? $this->real_fund : $this->user_fund ;
         $array['amount_to_show'] = number_format($amountToShow, 2);
+        $array['created_at_formatted'] = Carbon::parse($this->created_at)->format('Y-m-d');
 
         return $array;
     }
