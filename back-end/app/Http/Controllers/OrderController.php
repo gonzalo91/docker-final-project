@@ -17,7 +17,9 @@ class OrderController extends Controller
 
         $user = request()->user();
 
-        return OrderResource::collection( $user->orders()->orderBy('id', 'desc')->get() );
+        $orders = $user->orders()->with(['loan'])->orderBy('id', 'desc')->get();
+
+        return OrderResource::collection( $orders );
 
     }
 
@@ -40,6 +42,6 @@ class OrderController extends Controller
                 ->send(new OrderCreated($order));
         }
 
-        return response('Order Creada', 201);
+        return response(['status' => 'Order Creada'], 201);
     }
 }
