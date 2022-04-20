@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserBalanceController;
-use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')
@@ -20,8 +21,7 @@ Route::middleware('auth')
     
     Route::get('/perfil', [ProfileController::class, 'index'])->name('profile');
     Route::get('/perfil/image-profile', [ProfileController::class, 'image']);
-    Route::post('/perfil/image-profile', [ProfileController::class, 'updateImage']);
-    
+    Route::post('/perfil/image-profile', [ProfileController::class, 'updateImage']);        
     
     Route::get('loans', [LoanController::class,'index']);
     
@@ -29,6 +29,7 @@ Route::middleware('auth')
     Route::get('orders', [OrderController::class, 'getAllByUser']);
     
     Route::get('balance', [UserBalanceController::class, 'index']);
+
 
 });
 

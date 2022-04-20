@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserBalanceController;
+use App\Http\Controllers\UserFcmTokenController;
 use App\Http\Controllers\Auth\LoginMovilController;
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::post('/login', [LoginMovilController::class, 'login' ])
 
 Route::middleware('auth:sanctum')->group(function(){
 
+    Route::post('user/save-token', [UserFcmTokenController::class, 'store'])->name('user.save-token');
     Route::get('loans', [LoanController::class,'index']);    
     Route::post('orders', [OrderController::class, 'store']);
     Route::get('orders', [OrderController::class, 'getAllByUser']);    
