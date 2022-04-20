@@ -17,5 +17,9 @@ class UserFcmTokenController extends Controller
         return ['status' => 'ok'];
 
     }
+    
+    public function destroy(CreateUserFcmTokenRequest $request){
+        $request->user()->fcmTokens()->where('token', $request->token)->delete();
+    }
 
 }

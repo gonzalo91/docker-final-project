@@ -25,6 +25,7 @@ Route::post('/login', [LoginMovilController::class, 'login' ])
 
 Route::middleware('auth:sanctum')->group(function(){
 
+    Route::delete('user/save-token',  [UserFcmTokenController::class, 'destroy']);
     Route::post('user/save-token', [UserFcmTokenController::class, 'store'])->name('user.save-token');
     Route::get('loans', [LoanController::class,'index']);    
     Route::post('orders', [OrderController::class, 'store']);
