@@ -1,6 +1,9 @@
+from pyfcm import FCMNotification
 from exceptions import exceptions
-from repo.OrderFlowRepo import OrderFlowRepo
+
+from config import Config
 from events.FlowEvents import FlowEvents
+from repo.OrderFlowRepo import OrderFlowRepo
 
 class ProcessOrderServices():
 
@@ -116,7 +119,18 @@ class ProcessOrderServices():
 
             if(event['type'] == 2):
                 self.flowEvent.orderProcessed(event['order_id'], event['user_id'], str(event['status']))
+                self.__dispactchPushNotifications(event['order_id'], event['user_id'], str(event['status']))
 
+    def __dispactchPushNotifications(self, orderId, userId, status):
+        tokens_list = self.orderFlowRepo.getFcmTokens(userId)
+        tokens = list(map(lambda t : t['token'], tokens_list))
+
+        key = Config.FCM_KEY        
+        push_service = FCMNotification(api_key=key)
+
+        message_title = "Orden %s Procesada" % orderId
+        message_body = "Aceptada" if status == 'ok' else "Rechazada"
+        push_service.notify_multiple_devices(registration_ids=tokens, message_title=message_title, message_body=message_body)
                 
 
 

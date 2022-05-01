@@ -35,6 +35,10 @@ class OrderFlowRepo(ABC):
     def substractBalance(self, id: int, balanceToSubstract: float):
         pass
 
+    @abstractmethod
+    def getFcmTokens(self, userId: int):
+        pass
+        
     ###########
 
     @abstractmethod

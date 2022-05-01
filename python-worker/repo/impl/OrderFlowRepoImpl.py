@@ -52,6 +52,10 @@ class OrderFlowRepoImpl(OrderFlowRepo):
         return self.__dataSource.update('UPDATE users SET balance = balance - %s WHERE id = %s', 
         (balanceToSubstract, id))
 
+    def getFcmTokens(self, userId: int):
+        return self.__dataSource.select('SELECT token FROM user_fcm_tokens WHERE user_id = %s', 
+        (userId,))        
+
     ########### Orders
 
     def setStatusToProcessing(self, ids: list):
