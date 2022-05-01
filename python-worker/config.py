@@ -14,4 +14,6 @@ class Config:
     REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
     REDIS_PASS = os.environ.get('REDIS_PASS', '')
     REDIS_DB = os.environ.get('REDIS_DB', '0') 
-    REDIS_REQUIRE_SSL = os.environ.get('REDIS_REQUIRE_SSL', 'false')   
+    REDIS_REQUIRE_SSL = os.environ.get('REDIS_REQUIRE_SSL', 'false')  
+
+    FCM_KEY  = os.environ.get('FCM_KEY', '') 

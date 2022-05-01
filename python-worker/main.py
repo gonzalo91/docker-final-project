@@ -17,5 +17,5 @@ while(True):
     processOrderService.process()
 
     print('run!')
-    time.sleep(5)
+    time.sleep(60)
 
