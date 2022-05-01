@@ -4,7 +4,7 @@ version: '3.4'
 
 services:
   back-end:
-    image: zalollauri/loan-back-end:1.2.0
+    image: zalollauri/loan-back-end:1.4.0
     build: ./back-end
     container_name: back-end
     restart: unless-stopped
@@ -53,7 +53,7 @@ services:
   
  
   worker:
-    image: zalollauri/loan-worker:1.0.0
+    image: zalollauri/loan-worker:1.1.1
     build: ./python-worker
     container_name: worker
     restart: unless-stopped
@@ -75,6 +75,7 @@ services:
       - REDIS_DB=${REDIS_DB:-0}
       - REDIS_REQUIRE_SSL=${REDIS_REQUIRE_SSL:-false}
       - APP_ENV=${APP_ENV:-production}
+      - FCM_KEY=${FCM_KEY}
 
   proxy: 
     image: zalollauri/loan.proxy:1.0.0
